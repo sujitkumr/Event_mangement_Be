@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO Test</title>
+  <!-- Load Socket.IO client library from CDN -->
+  <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Socket.IO Test</h1>
+  <script>
+    // Connect to your Socket.IO server
+    const socket = io('http://localhost:3000', { withCredentials: true });
+    
+    // Listen for the connection event
+    socket.on('connect', () => {
+      console.log('Connected to server, socket id:', socket.id);
+      // Optionally join a room
+      socket.emit('joinRoom', 'test-room');
+    });
+
+    // Listen for custom events (e.g., attendeesUpdated)
+    socket.on('attendeesUpdated', (data) => {
+      console.log('Received attendeesUpdated event:', data);
+    });
+  </script>
+</body>
+</html>
